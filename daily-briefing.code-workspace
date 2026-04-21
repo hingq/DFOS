@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "python3",
+    "python.analysis.typeCheckingMode": "basic",
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/.DS_Store": true
+    },
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "none"
+  }
+}

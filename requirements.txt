@@ -1,0 +1,9 @@
+anthropic>=0.40.0
+feedparser>=6.0.0
+certifi>=2024.0.0
+imageio-ffmpeg>=0.5.1
+markdown>=3.5
+playwright>=1.48.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+websocket-client>=1.6.0

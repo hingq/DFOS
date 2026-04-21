@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>这次更新到底改变了什么？</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.7; color: #37352f; max-width: 900px; margin: 0 auto; padding: 60px 40px; }
+        h1 { font-size: 40px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { font-size: 16px; color: #787774; margin-bottom: 24px; }
+        .audio-section { margin: 0 0 48px 0; padding: 16px 20px; background: #f7f6f3; border-radius: 8px; }
+        .audio-section h3 { font-size: 12px; text-transform: uppercase; color: #787774; margin-bottom: 12px; }
+        .audio-player { display: flex; align-items: center; gap: 16px; }
+        .play-btn { width: 40px; height: 40px; border-radius: 50%; background: #37352f; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .play-btn svg { width: 16px; height: 16px; fill: #fff; margin-left: 2px; }
+        .audio-info { flex: 1; }
+        .audio-title { font-size: 14px; font-weight: 500; }
+        .audio-meta { font-size: 12px; color: #787774; }
+        .audio-wave { display: flex; align-items: center; gap: 2px; height: 20px; }
+        .audio-wave span { width: 2px; background: #d9d9d9; border-radius: 2px; animation: wave 1s ease-in-out infinite; }
+        .audio-wave span:nth-child(1) { height: 10px; } .audio-wave span:nth-child(2) { height: 16px; } .audio-wave span:nth-child(3) { height: 20px; } .audio-wave span:nth-child(4) { height: 14px; } .audio-wave span:nth-child(5) { height: 18px; }
+        @keyframes wave { 0%, 100% { transform: scaleY(0.5); } 50% { transform: scaleY(1); } }
+        h2 { font-size: 28px; font-weight: 600; margin: 40px 0 16px; padding-top: 24px; line-height: 1.3; }
+        .dialogue-q { background: #f7f6f3; padding: 16px 20px; border-radius: 4px; margin: 24px 0 12px; font-weight: 500; line-height: 1.6; }
+        .dialogue-q::before { content: "Q："; color: #787774; font-weight: 600; margin-right: 4px; }
+        .dialogue-a { padding: 0; margin: 0 0 16px 0; line-height: 1.8; }
+        .dialogue-a::before { content: "A："; color: #eb5757; font-weight: 600; margin-right: 4px; float: left; }
+        .dialogue-a .content { margin-left: 28px; }
+        .dialogue-a .content p { margin-bottom: 10px; }
+        mark { background-color: #fff5b8; padding: 2px 4px; border-radius: 2px; color: #37352f; font-weight: 500; }
+        .ref { font-size: 12px; color: #787774; vertical-align: super; }
+        .summary { background: #f7f6f3; padding: 24px; border-radius: 6px; margin: 40px 0; }
+        .summary h3 { margin-top: 0; font-size: 16px; }
+        .references { margin-top: 48px; padding-top: 32px; }
+        .references h3 { font-size: 14px; text-transform: uppercase; color: #787774; margin-bottom: 16px; }
+        .references ul { list-style: none; padding-left: 0; }
+        .references li { margin-bottom: 12px; }
+        .references a { color: #37352f; text-decoration: none; border-bottom: 1px solid #e0e0e0; }
+        @media (max-width: 768px) { body { padding: 32px 20px; } h1 { font-size: 32px; } h2 { font-size: 24px; } }
+    </style>
+</head>
+<body>
+    <h1>这次更新到底改变了什么？</h1>
+    <p class="subtitle"></p>
+    
+        <div class="audio-section">
+            <h3>语音播客</h3>
+            <div class="audio-player">
+                <button class="play-btn" onclick="togglePlay()">
+                    <svg viewBox="0 0 24 24" id="play-icon">
+                        <polygon points="5,3 19,12 5,21"></polygon>
+                    </svg>
+                </button>
+                <div class="audio-info">
+                    <div class="audio-title">这次更新到底改变了什么？</div>
+                    <div class="audio-meta">时长 8:24 · AI+设计日报</div>
+                </div>
+                <div class="audio-wave">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    <p class="dialogue-q">** 说白了，这不就是以前「文本转 UI」的升级版吗？以前那些 AI 生成 UI 的工具不也能做到？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 不太一样。以往工具的问题是：生成的是静态图，你还得手动拆成可用的组件。但 Figma 这个——注意，它生成的</mark>是带约束和自动布局的 Figma 原生框架**，也就是说生成出来的东西是可以直接编辑、响应式调整的。</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 响应式？这点很重要吗？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p>** 太重要了。你知道以前设计师最大的痛点是什么吗？是「做了一套移动端布局，PC 端要重新拉一遍」。现在 AI 生成的这个布局，父容器改成响应式——它自动带约束，PC 端和移动端可以共享同一套结构，宽度拉一下就行。</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 所以设计师从「拉框架」这个体力活里解放出来了。</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 不仅仅是体力活。</mark>这是一个工作流的根本转变**：过去设计师从白纸或者模板开始，一步步把想法「画」出来；现在你可以先「说」出你想要什么布局，AI 生成第一稿，你再在这个基础上做精细调整——相当于从「从零画」变成「修改润色」。</p>
+        </span>
+    </div>
+    <h2>设计师会失业吗？</h2>
+    <p class="dialogue-q">** 哎，别高兴太早。我看到不少设计师已经开始焦虑了：这功能要是都能 AI 做了，那还要 UI 设计师干嘛？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 这焦虑我理解，但坦白说——</mark>有点过度了**。你看这个功能的名字，「AI 自動布局」，重点是「布局」，不是「设计」。它解决的是「把想法快速变成可编辑的框架」这个前端的效率问题。</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 那后端呢？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 后端才是设计师真正的价值所在。AI 能生成一个看起来合理的布局，但它：</mark>不知道品牌调性应该是什么颜色、不知道这个按钮放在这里是增加了认知负担还是降低了转化、不知道这个交互路径是否真的符合用户的心智模型**。这些判断——需要经验、需要业务理解、需要审美——是目前 AI 做不到的。</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 说白了，AI 做的是「及格线以上的标准化输出」，设计师做的是「90 分以上的差异化表达」。</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 差不多是这个逻辑。而且你想一个场景：如果所有人都用同一个 AI 生成布局，那最终做出来的页面还有差异性吗？所以设计师的价值不是消失了，而是</mark>从「执行层」上移到「策略层」**：你更核心的工作是定义「什么是对的布局」，而不是「怎么画出这个布局」。</p>
+        </span>
+    </div>
+    <h2>但这不是完美的</h2>
+    <p class="dialogue-q">** 等等，我有个问题：这功能真的像 demo 里那么神吗？我不信它没局限。</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p>** 肯定有限制。目前来看几个明显问题：</p><p>第一，<mark>复杂交互和动效</mark>——AI 生成的是静态布局，业务逻辑层面的东西它根本处理不了。你做一个表单验证、做一个下拉联动，这些还是得手动做。</p><p>第二，<mark>品牌一致性</mark>——如果你公司有严格的设计系统，AI 生成的布局是否符合你们的组件规范、色彩规范？这事目前它可做不到自动对齐。</p><p>第三，<mark>信任问题</mark>——AI 生成的东西，设计师拿到手之后要不要检查一遍？那检查的成本和直接自己做一个相比，哪个更高？不一定。</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 还有就是——prompt 怎么写，本身就是一门技术活。描述不清楚，AI 生成的就不对。那最后不还是得设计师自己先想清楚？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 对，这其实对设计师的</mark>抽象能力**提出了新要求：你能多精准地把业务需求翻译成一句有效的布局描述。这本身就是经验。</p>
+        </span>
+    </div>
+    <h2>行业里会怎么变？</h2>
+    <p class="dialogue-q">** 那你觉得这个功能会带来什么连锁反应？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p>** 我觉得几个趋势会比较明显：</p><p>第一个，<mark>入行门槛会更低</mark>。以前刚入行的设计师得学很久 Figma 的布局技巧，现在 AI 能帮你快速出一稿。这意味着初级岗位的需求可能会减少，但「能独立做完整设计决策」的高级设计师会更稀缺。</p><p>第二个，<mark>工具链会加速融合</mark>。Figma 开了这个头，Sketch、Adobe 这些对手肯定会跟进。整个行业的设计工具都会往「AI 辅助生成」这个方向卷。</p><p>第三个，<mark>人机协作的范式会变</mark>。以前设计师是「操作工具」，以后设计师变成「指导 AI」。这个角色转变需要时间去适应。</p>
+        </span>
+    </div>
+    <h2>值不值得现在就去试？</h2>
+    <p class="dialogue-q">** 说半天，你觉得普通设计师现在应该做什么？</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 我的建议是：</mark>先去申请试用，把功能玩起来**。这个能力目前还在逐步开放，你首先要做的，是知道它能做什么、不能做什么。对了，key docs 里说可以申请试用——这波明天工作方式直接改变，真不是夸张。</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 嗯，了解了。我先去排队申请一个。</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p>** 记得拿到试用别光看 demo，自己去跑几个实际场景：做一个活动页、做一个详情页、做一个后台列表页——看看 AI 生成的东西离你最终想要的还有多远。差距，就是你未来的价值空间。</p>
+        </span>
+    </div>
+    <h2>结尾</h2>
+    <p class="dialogue-q"><mark> 总之，这个功能给我的感觉是：</mark>它不是来替代设计师的，而是来重新定义设计师做什么的**。从「操作者」变成「决策者」，这个转变才是真正的重点。</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p><mark> 对。而且这种转变在设计行业不是第一次，也不会是最后一次。每一代工具升级都在重新定义「好设计师」的标准。</mark>核心问题是：你愿不愿意跟着这个标准一起升级。**</p>
+        </span>
+    </div>
+    <p class="dialogue-q">** 行，那今天的重点我收下了。申请试用，走起。</p>
+    <div class="dialogue-a">
+        <span class="content">
+            <p>** 嗯，去吧。记住，真正的设计价值，永远在 AI 生成不到的地方。</p>
+        </span>
+    </div>
+    <script>let isPlaying = false; function togglePlay() { const icon = document.getElementById('play-icon'); isPlaying = !isPlaying; icon.innerHTML = isPlaying ? '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>' : '<polygon points="5,3 19,12 5,21"></polygon>'; }</script>
+</body>
+</html>

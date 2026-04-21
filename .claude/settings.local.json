@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(command -v opencli-rs)",
+      "Bash(curl -fsSL https://raw.githubusercontent.com/nashsu/opencli-rs/main/scripts/install.sh)",
+      "Bash(sh)",
+      "Bash(brew install:*)",
+      "Bash(autocli --help)",
+      "Bash(autocli twitter:*)",
+      "WebSearch",
+      "WebFetch(domain:azure.microsoft.com)",
+      "Bash(pip3 install:*)",
+      "WebFetch(domain:skills.sh)",
+      "Bash(curl -sL \"https://api.github.com/repos/noizai/skills/contents/tts\")",
+      "Bash(gh repo:*)",
+      "Bash(curl -sL \"https://skills.sh/noizai/skills/tts\")",
+      "Bash(npx skills:*)",
+      "Bash(uv tool:*)",
+      "Bash(ls:*)",
+      "Bash(brew list:*)",
+      "Bash(afconvert -f mp4f -d aac -s 1 -b 128k merge_list.txt ../combined.m4a)",
+      "Bash(curl -sL https://raw.githubusercontent.com/affaan-m/everything-claude-code/main/skills/article-writing/SKILL.md)",
+      "Read(//Users/liyuwen/**)",
+      "Bash(npx -y skills add https://github.com/affaan-m/everything-claude-code --skill article-writing --global)",
+      "Bash(npx:*)",
+      "Bash(curl -sL \"https://raw.githubusercontent.com/obra/superpowers/main/skills/writing-skills/SKILL.md\")",
+      "Bash(curl -s \"https://api.github.com/repos/obra/superpowers/contents/skills/writing-skills\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh api:*)",
+      "Bash(wget -q -O - --timeout=10 \"https://raw.githubusercontent.com/obra/superpowers/main/skills/writing-skills/SKILL.md\")",
+      "Bash(curl -s --connect-timeout 5 \"https://api.github.com/repos/obra/superpowers/contents/skills/writing-skills/SKILL.md\")",
+      "Bash(curl -s \"https://api.github.com/repos/obra/superpowers/contents/skills/writing-skills/SKILL.md\" --header \"Accept: application/vnd.github.v3.raw\")",
+      "Bash(playwright install:*)",
+      "Bash(DEBUG_LLM=1 python3 -m pipeline.main --skip-scrape)",
+      "Bash(open:*)",
+      "Bash(curl -s -X POST https://api.minimax.io/v1/text/chatcompletion_v2 -H 'Authorization: Bearer sk-cp-y4qt_m4gV9AW6516rA9kePqbw7wteO2T3stFRqvrqNicIbp1OXhwP_9P5QENyCDonFfsFqSjGlUqW2tECCmAdOhtkb_K4vnSYp' -H 'Content-Type: application/json' -d '{\"model\": \"MiniMax-M2.5\", \"messages\": [{\"role\": \"user\", \"content\": \"hi\"}]}')",
+      "Bash(pip install:*)",
+      "Bash(xxd)"
+    ]
+  }
+}

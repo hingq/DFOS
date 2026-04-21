@@ -1,0 +1,63 @@
+# Daily Briefing Pipeline — Cursor Rules
+
+## 项目概述
+AI + 设计行业情报平台：多信源抓取 → 日报（简报 JSON）→ **单产品对话式长文 `article.md`**（口播母本）→ **TTS 音频**。详见 `.claude/CLAUDE.md`。
+
+## 四步主流程（与实现一致）
+1. **数据抓取**：RSS / HN / PH / manual / autocli 等 + Twitter Intelligence（素材合流进 `data/raw/`）
+2. **日报生成**：`pipeline.main` → `briefing.md`（可含 **`## 值得深挖`** 0～2 条，规则 `context/deep_dive.md`，短名单 `pipeline/deep_dive.py`）+ `processing.json` / `scoring.json`；同一步 **自动生成** 简报网页 `web/dist/briefing/{DATE}.html`（样式源 `.claude/skills/briefing-html-style/assets/briefing.css`）
+3. **结构化文章**：`tools/generate_article.py` 用 `pipeline/article_pick.py` **择 1 条**，生成 **`{DATE}-article.md`**（对话式、单产品全量分析）；体裁见 `.claude/skills/briefing-article-style/SKILL.md`
+4. **语音**：主路径 **`python -m tools.article_tts`（讯飞）** / **`article-dialogue-tts` skill**；备选 `python -m tools.tts_dialogue`（Edge 等）。**默认只读** `data/output/{DATE}-article.md`（`tools/tts_paths.py`）；旧 `generate_dialogue_*.py` 为 shim
+
+**禁止**：从 `briefing.md` 再写一篇平行长对话作为口播主稿；已移除 `briefing-chat.md` 流水线。
+
+## 技术栈
+- Python 3.11+
+- MiniMax 文本 API（Anthropic SDK + `https://api.minimax.io/anthropic` 兼容层，`MINIMAX_API_KEY`）
+- Playwright（页面抓取）, feedparser（RSS）
+- 数据存储: JSON 文件（MVP），后续迁移 SQLite
+
+## 架构规则
+- 所有抓取结果必须输出为 `scraper/base.py` 中定义的 `RawItem` 格式
+- Prompt 模板集中管理在 `pipeline/prompts/` 目录
+- Context 文件（`context/*.md`）是核心知识资产，通过 `config/settings.load_context()` 注入 prompt
+- 配置与代码分离：信源、关键词、黑名单都在 `config/` 目录
+- 中间结果保存到 `data/intermediate/`，方便调试
+
+## Agent / Skill 速查
+- **Specs**：`specs/*-agent/`（含 `daily-briefing`、`briefing-article`、`dialogue-briefing` 音频、`twitter-intelligence`、`product-research`）
+- **Skills**：`briefing-article-style`（步骤 3 体裁）、`briefing-html-style`（简报网页，pipeline 自动产出）、`daily-review`、`multi-search`、`autocli`、`article-dialogue-tts`（步骤 4 讯飞口播）
+- **命令**：`.claude/commands/`（`daily-briefing`、`briefing-article`、`dialogue-briefing` 等）
+
+## 代码风格
+- 使用 type hints
+- 每个模块有 docstring 说明用途
+- 函数名用英文，注释和文档用中文
+- print 输出带模块标签，如 `[autocli]`、`[rss]`
+
+## Pipeline 子流程（步骤 2 内部）
+1. scraper/ → 抓取，输出 RawItem JSON
+2. pipeline/prefilter.py → 关键词预过滤（不调 LLM）
+3. pipeline/prompts/scoring.py → LLM 6维评分
+4. pipeline/prompts/processing.py → LLM 分类 + 实体提取
+5. pipeline/prompts/generation.py → LLM 生成**列表式**简报（注入 context）
+6. pipeline/notify.py → 推送通知
+
+## 修改 Prompt 时的注意事项
+- prompt 是本项目最核心的资产，修改需谨慎
+- `scoring.py` 的维度权重体现编辑判断力，不要随意改动
+- `generation.py` 通过 `load_context()` 动态加载 context 文件
+- LLM 输出格式为 JSON，需要在 prompt 中明确指定 schema
+- 修改 prompt 后建议保留旧版本作为注释
+
+## 扩展新信源
+1. 在 `config/sources.py` 添加信源配置
+2. 如果是 RSS → 直接启用即可，`scraper/rss.py` 通用处理
+3. 如果是 Playwright → 在 `scraper/` 下新建文件，实现 `run()` 函数
+4. 在 `pipeline/main.py` 的 `step_scrape()` 中调用新 scraper
+
+## 数据目录
+- `data/raw/` — 每日原始抓取（按日期+信源命名）
+- `data/manual/` — 手动添加的条目
+- `data/intermediate/` — LLM 处理中间结果（调试用）
+- `data/output/` — `briefing.md`、`article.md`、音频、`product-profiles/` 等
